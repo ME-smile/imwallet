@@ -1,0 +1,4 @@
+enum AppLanguage {
+  zh,
+  en,
+}
