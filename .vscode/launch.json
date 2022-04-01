@@ -11,7 +11,17 @@
             "flutterMode": "debug",
             "args": [
                 "--dart-define",
-                "DART_DEFINE_APP_ENV=debug"
+                "APP_ENV=debug",
+                "--dart-define",
+                "APP_FLAVOR=MaxMoney",
+                "--dart-define",
+                "APP_PACKAGE_NAME=com.maxmoney.quantstrategy.dev",
+                "--dart-define",
+                "APP_NAME=MaxMoney",
+                "--dart-define",
+                "APP_LAUNCH_ICON=@mipmap/maxmoney_logo",
+                "--dart-define",
+                "APP_LAUNCH_IMAGE=MAX Money",
             ]
         },
         {
@@ -20,7 +30,7 @@
             "type": "dart",
             "args": [
                 "--dart-define",
-                "DART_DEFINE_APP_ENV=test"
+                "ENV=test"
             ]
         },
         {
@@ -29,7 +39,7 @@
             "type": "dart", 
             "args": [
                 "--dart-define",
-                "DART_DEFINE_APP_ENV=prod"
+                "ENV=prod"
             ]
         }
     ]

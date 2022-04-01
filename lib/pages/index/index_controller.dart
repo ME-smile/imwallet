@@ -1,18 +1,19 @@
-import 'package:dc_flutter_cli/components/base/future_loadstate_builder.dart';
-import 'package:dc_flutter_cli/api/home_api.dart';
-import 'package:dc_flutter_cli/api/user_api.dart';
-import 'package:dc_flutter_cli/model/response/home_data_model.dart';
+import 'package:dc_flutter_cli/pages/home/home_controller.dart';
+import 'package:dc_flutter_cli/typedefs/future_callback.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
-class IndexController extends BaseFutureLoadStateController<HomeDataModel?> {
-  HomeDataModel? homeData;
+class IndexController extends GetxController {
+  List<FutureCallback> _refreshCallbacks = <FutureCallback>[];
+  Future refreshData() {
+    return Future.wait(_refreshCallbacks.map((e) => Function.apply(e, null)));
+  }
 
-  @override
-  Future<HomeDataModel?> loadData({Map? params}) {
-    return UserAPI.getProfile().then((value) {
-      return HomeAPI.getHomeData(userId: value.id ?? '').then((data) {
-        homeData = data.copyWith(user: value);
-        return homeData;
-      });
-    });
+  void registerRefreshCallback(FutureCallback callback) {
+    _refreshCallbacks.add(callback);
+  }
+
+  void openDrawer() {
+    Function.apply(Get.find<HomeController>().openDrawer ?? () {}, []);
   }
 }

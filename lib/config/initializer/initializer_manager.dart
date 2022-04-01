@@ -20,6 +20,7 @@ abstract class InitializerManager<T extends BaseInitilizer> {
     ///是否允许打印
     LoggerInitializer(),
     DeviceInitializer(),
+    // UserInitializer(),
   ];
 
   ///进行统一初始化

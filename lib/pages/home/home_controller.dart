@@ -4,37 +4,35 @@
  * @Date: 2021-09-18 15:18:30
  * @LastEditTime: 2021-09-18 15:18:30
  */
-import 'package:dc_flutter_cli/model/ui/bottom_navigation_item_model.dart';
-import 'package:dc_flutter_cli/res/R.dart';
-import 'package:dc_flutter_cli/translations/app_translations.dart';
+import 'package:dc_flutter_cli/storage/sp_util.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final List<BottomNavigationItemModel> bottomNavigationItemModels = [
-    BottomNavigationItemModel(
-      icon: R.icon.home,
-      selectedIcon: R.icon.homeSelected,
-      label: AppLocaleKey.home.name,
-    ),
-    BottomNavigationItemModel(
-      icon: R.icon.quantification,
-      selectedIcon: R.icon.quantificationSelected,
-      label: AppLocaleKey.quantification.name,
-    ),
-    BottomNavigationItemModel(
-      icon: R.icon.follow,
-      selectedIcon: R.icon.followSelected,
-      label: AppLocaleKey.follow.name,
-    ),
-    BottomNavigationItemModel(
-      icon: R.icon.strategy,
-      selectedIcon: R.icon.strategySelected,
-      label: AppLocaleKey.strategy.name,
-    ),
-    BottomNavigationItemModel(
-      icon: R.icon.profit,
-      selectedIcon: R.icon.profitSelected,
-      label: AppLocaleKey.profit.name,
-    ),
-  ];
+  String? projectName = null;
+  String? projectLogo = null;
+  Function()? openDrawer;
+  @override
+  void onReady() {
+    super.onReady();
+    initProjectInfo();
+  }
+
+  void saveProjectInfo(
+      {required String? projectName, required String? projectLogo}) {
+    SpUtil.setString(SpKey.projectLogo, projectLogo ?? '');
+    SpUtil.setString(SpKey.projectName, projectName ?? '');
+    this.projectLogo = projectLogo;
+    this.projectName = projectName;
+    update(['project']);
+  }
+
+  void initProjectInfo() {
+    projectLogo = SpUtil.getString(SpKey.projectLogo);
+    projectName = SpUtil.getString(SpKey.projectName);
+    update(['project']);
+  }
+
+  void setOpenDrawerHandler(Function()? callback) {
+    openDrawer = callback;
+  }
 }

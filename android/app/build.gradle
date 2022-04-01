@@ -22,8 +22,10 @@ if (flutterVersionName == null) {
 }
 
 def dartDefine = [
-    DART_DEFINE_APP_ENV: 'debug',
-    DART_DEFINE_APP_FLAVOR:'MaxMoney',
+    APP_ENV: 'debug',
+    APP_NAME: 'MaxMoney',
+    APP_PACKAGE_NAME:'com.maxmoney.quantstrategy',
+    APP_LAUNCH_ICON:'@mipmap/maxmoney_logo'
 ]
 if (project.hasProperty('dart-defines')) {
     dartDefine = dartDefine + project.property('dart-defines')
@@ -48,13 +50,13 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId dartDefine.DART_DEFINE_APP_FLAVOR
+        applicationId dartDefine.APP_PACKAGE_NAME
         minSdkVersion 19
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        resValue "string","app_name","DDC${dartDefine.DART_DEFINE_APP_ENV}",
-        resValue "String","app_launch_image","",
+        resValue "string","app_name","${dartDefine.APP_NAME}"
+        resValue "string","app_icon","${dartDefine.APP_LAUNCH_ICON}"
     }
 
     buildTypes {

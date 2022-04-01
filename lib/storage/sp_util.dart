@@ -5,6 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 enum SpKey {
   token,
   refreshToken,
+  user,
+  projectName,
+  projectLogo,
 }
 
 abstract class SpUtil {
@@ -16,6 +19,9 @@ abstract class SpUtil {
   static Future<void> remove(SpKey key) => _prefs.remove(key.name);
 
   static String? getString(SpKey key) => _prefs.getString(key.name);
+
+  static Future<bool> setString(SpKey key, String data) =>
+      _prefs.setString(key.name, data);
 
   static Map? getJson(SpKey key) {
     final String? jsonString = _prefs.getString(key.name);

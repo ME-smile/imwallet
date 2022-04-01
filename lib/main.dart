@@ -4,9 +4,10 @@
  * @Date: 2021-09-18 10:42:46
  * @LastEditTime: 2022-02-07 17:50:13
  */
+import 'package:bot_toast/bot_toast.dart';
 import 'package:dc_flutter_cli/translations/app_translations.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -47,13 +48,13 @@ class MyApp extends StatelessWidget {
         ),
       ),
       child: GetMaterialApp(
-        title: 'Cli',
+        title: AppConfig.appName,
         initialBinding: HomeBinding(),
         initialRoute: AppRoutes.home,
         getPages: AppRouter.pages,
         defaultTransition: Transition.cupertino,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.dartTheme,
+        theme: AppTheme.maxMoneyTheme,
+        darkTheme: ThemeData(),
         debugShowCheckedModeBanner:
             AppConfig.environment == AppEnvironment.debug,
         builder: (BuildContext context, Widget? child) {
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
             data: MediaQuery.of(context).copyWith(
                 boldText: false,
                 textScaleFactor: GetPlatform.isAndroid ? 0.88 : 1.0),
-            child: FlutterEasyLoading(child: child),
+            child: BotToastInit()(context, child),
           );
         },
         localizationsDelegates: [
@@ -78,6 +79,7 @@ class MyApp extends StatelessWidget {
           const Locale('zh', 'CH'),
         ],
         fallbackLocale: Locale('zh', 'CH'),
+        navigatorObservers: [BotToastNavigatorObserver()],
         localeResolutionCallback:
             (Locale? locale, Iterable<Locale> supportedLocales) {
           //print("change language");

@@ -14,9 +14,9 @@ import '../app_flavor.dart';
 
 abstract class AppConfig {
   static const String _environment =
-      String.fromEnvironment("DART_DEFINE_APP_ENV", defaultValue: "debug");
-  static const String _flavor = String.fromEnvironment("DART_DEFINE_APP_FLAVOR",
-      defaultValue: "MaxMoney");
+      String.fromEnvironment("APP_ENV", defaultValue: "debug");
+  static const String _flavor =
+      String.fromEnvironment("APP_FLAVOR", defaultValue: "MaxMoney");
 
   static AppEnvironment get environment => getAppEnv(_environment);
   static AppFlavor get flavor => getAppFlavor(_flavor);
@@ -26,11 +26,11 @@ abstract class AppConfig {
 
   static PackageInfo? packageInfo;
 
-  static String? get systemVersion {
+  static String? get appVersion {
     if (GetPlatform.isAndroid) {
-      return androidInfo?.version.codename;
+      return androidInfo?.version.release;
     }
-    return iosInfo?.systemVersion;
+    return iosInfo?.name;
   }
 
   static String get appName => flavor.label;

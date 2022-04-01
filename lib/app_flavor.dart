@@ -26,6 +26,7 @@ extension AppFlavorKit on AppFlavor {
         AppFlavor.Waves: 'ID_20201212_11111111111111111111'
       }[this] ??
       '';
+
   String get label =>
       {
         AppFlavor.TransactionManager: '交易管家',

@@ -11,6 +11,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dc_flutter_cli/model/response/bearer_token_model.dart';
+import 'package:dc_flutter_cli/model/response/user_profile_model.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/adapter.dart';
 import 'package:dc_flutter_cli/config/app_config.dart';
@@ -19,6 +20,7 @@ import 'package:dc_flutter_cli/router/app_router.dart';
 import 'package:dc_flutter_cli/storage/sp_util.dart';
 import 'package:dc_flutter_cli/utils/toast_util.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart' as g;
 import 'dart:developer' as developer;
 part "adaptor/base_adaptor.dart";
@@ -135,11 +137,13 @@ class Http {
         requestOptions.copyWith(extra: {"withToken": request.withToken});
 
     return dio
-        .get(request.path,
-            cancelToken: request.cancelToken ?? _cancelToken,
-            queryParameters: request.query,
-            onReceiveProgress: request.onReceiveProgress,
-            options: requestOptions)
+        .get(
+          request.path,
+          cancelToken: request.cancelToken ?? _cancelToken,
+          queryParameters: request.query,
+          onReceiveProgress: request.onReceiveProgress,
+          options: requestOptions,
+        )
         .then(_onData, onError: _onError);
   }
 

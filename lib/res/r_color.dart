@@ -12,17 +12,19 @@ class _RColor {
   _RColor._();
   factory _RColor() => _singleton;
 
-  final Color scaffoldBackgroundColor = const Color(0xFF3D3733);
+  final Color scaffoldBackgroundColor = const Color(0xFF1E1F24);
 
-  final Color appBarBackgroundColor = Colors.black;
+  final Color appBarBackgroundColor = const Color(0xFF1E1F24);
 
   final Color appBarTitleColor = const Color(0xFFFDFDFD);
 
-  final Color primary = const Color(0xFF201812);
+  final Color primary = const Color(0xFF8FC54B);
 
   final Color textButton = Colors.white;
 
-  final Color primaryTextColor = Colors.white;
+  final Color secondary = Colors.white;
+
+  final Color primaryTextColor = const Color(0xFF8FC54B);
 
   final Color textFieldBorder = const Color(0xFF222222);
 
@@ -30,6 +32,7 @@ class _RColor {
   final Color elevatedButtonColor = const Color(0xFFC78904);
   final Color elevatedButtonTextColor = Colors.white;
   final Color diabledEvatedButtonTextColor = const Color(0xFFB7B7B7);
+  final Color labelMediumColor = const Color(0xFFB7B7B7);
 
   final Color bodyText1Color = Colors.white;
 
@@ -37,6 +40,7 @@ class _RColor {
 
   final Color bodyLargeColor = Colors.white;
 
+  final Color bodySmallColor = Color(0xFFB7B7B7);
   final Color labelSmallColor = Color(0xFFB7B7B7);
 
   final Color enabledInputDecorationBorder = Color(0xFFB7B7B7);
@@ -50,4 +54,16 @@ class _RColor {
   final Color iconColor = Colors.white;
 
   final Color accentColor = const Color(0xFFC78904);
+
+  final Color hoverColor = Colors.white.withOpacity(.1);
+  final Color hintColor = const Color(0xFF1B2628).withOpacity(.8);
+  final Color cardColor = Colors.white;
+  final Color selectedRowColor = const Color(0xFFA3A8A8).withOpacity(.5);
+  final Color unselectedWidgetColor = const Color(0xFFA3A8A8).withOpacity(.7);
+  final Color unselectedLabelColor = const Color(0xFFB7B7B7);
+  final Color tabLabelColor = Colors.white;
+  final Color colorScheme = Colors.white;
+  final Color chipColor = const Color(0xFF495153).withOpacity(.3);
+
+  final Color bottomNavigationBarBackgroundColor = const Color(0xFF1E1F24);
 }

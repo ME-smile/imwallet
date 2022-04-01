@@ -12,9 +12,19 @@ class ApiSessionInterceptor extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     if (options.extra["withToken"] != true) return handler.next(options);
     Map? json = SpUtil.getJson(SpKey.token);
-    if (json != null) {
-      options.headers.addAll(
-          {"Authorization": 'Bearer ${BearerTokenModel.fromJson(json).token}'});
+    BearerTokenModel? bearerToken =
+        json == null ? null : BearerTokenModel.fromJson(json);
+    Map? userJson = SpUtil.getJson(SpKey.user);
+    UserProfileModel? user =
+        userJson == null ? null : UserProfileModel.fromJson(userJson);
+    if (bearerToken != null) {
+      options.headers.addAll({"Authorization": 'Bearer ${bearerToken.token}'});
+    }
+    if (user != null) {
+      options.queryParameters.addAll({'userId': user.id});
+      if (options.data is Map) {
+        options.data.addAll({'userId': '${user.id}'});
+      }
     }
 
     handler.next(options);

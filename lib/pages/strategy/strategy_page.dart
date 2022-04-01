@@ -5,6 +5,7 @@ class StrategyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Text('策略');
     return Scaffold(
       appBar: AppBar(title: Text('策略')),
     );

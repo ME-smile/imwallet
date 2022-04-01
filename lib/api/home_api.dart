@@ -1,35 +1,9 @@
 import 'package:dc_flutter_cli/http/http.dart';
 import 'package:dc_flutter_cli/model/response/carousel_image_model.dart';
-import 'package:dc_flutter_cli/model/response/home_data_model.dart';
-import 'package:dc_flutter_cli/model/response/profit_brief_model.dart';
 import 'package:dc_flutter_cli/model/response/transaction_record_model.dart';
 
 abstract class HomeAPI {
-  static Future<HomeDataModel> getHomeData({
-    required String userId,
-  }) {
-    return _getStatistics(userId).then((value) {
-      return HomeDataModel(profitBrief: value);
-    }).then((value) {
-      return _getProjectImages().then((v) {
-        return value.copyWith(carousels: v);
-      });
-    }).then((value) {
-      print(value);
-      return getTransactionRecords().then((v) {
-        return value.copyWith(transactionRecords: v);
-      });
-    });
-  }
-
-  static Future<ProfitBriefModel> _getStatistics(String userId) {
-    return Http.instance
-        .get(ApiRequest('/maxmoneycloud-funds/userStatistics/getStatistics',
-            query: <String, dynamic>{'userId': userId}))
-        .then((value) => ProfitBriefModel.fromJson(value.data));
-  }
-
-  static Future<List<CarouselImageModel>> _getProjectImages() {
+  static Future<List<CarouselImageModel>> getProjectImages() {
     return Http.instance
         .get(ApiRequest('/maxmoneycloud-users/projectImages/getProjectImges'))
         .then((value) {

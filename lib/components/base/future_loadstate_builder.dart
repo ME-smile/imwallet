@@ -4,6 +4,7 @@
  * @Date: 2021-09-18 14:34:27
  * @LastEditTime: 2022-02-07 17:44:52
  */
+import 'package:dc_flutter_cli/components/app_empty_placeholder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -177,7 +178,9 @@ class FutureLoadStateBuilder<T extends BaseFutureLoadStateController>
   final GetControllerBuilder<T> builder;
   final Object? id;
   final String? tag;
-  FutureLoadStateBuilder({required this.builder, this.tag, this.id});
+  final WidgetBuilder? loadingBuilder;
+  FutureLoadStateBuilder(
+      {required this.builder, this.tag, this.id, this.loadingBuilder});
   @override
   Widget build(BuildContext context) {
     return controller.obx(
@@ -197,7 +200,9 @@ class FutureLoadStateBuilder<T extends BaseFutureLoadStateController>
                 ),
               ),
             ),
-        onEmpty: SizedBox.shrink(),
-        onLoading: Center(child: CupertinoActivityIndicator()));
+        onEmpty: AppEmptyPlaceHolder(),
+        onLoading: loadingBuilder == null
+            ? Center(child: CupertinoActivityIndicator())
+            : Builder(builder: loadingBuilder!));
   }
 }

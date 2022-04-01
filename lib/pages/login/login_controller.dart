@@ -4,7 +4,7 @@
  * @Date: 2021-09-18 15:23:38
  * @LastEditTime: 2021-09-18 15:44:17
  */
-import 'package:dc_flutter_cli/controllers/user_controller.dart';
+import 'package:dc_flutter_cli/api/user_api.dart';
 import 'package:dc_flutter_cli/model/request/login_arg_model.dart';
 import 'package:dc_flutter_cli/router/app_router.dart';
 import 'package:dc_flutter_cli/storage/sp_util.dart';
@@ -22,7 +22,9 @@ class LoginController extends GetxController {
     return LoginAPI.loginByPassword(arg: _arg).then((value) {
       return SpUtil.setJson(SpKey.token, value.toJson());
     }).then((value) {
-      Get.find<UserController>().fetchData();
+      return UserAPI.getProfile().then((value) {
+        return SpUtil.setJson(SpKey.user, value.toJson());
+      });
     }).then((value) {
       Get.toNamed(AppRoutes.home);
     });

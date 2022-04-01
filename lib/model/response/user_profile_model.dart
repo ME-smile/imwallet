@@ -20,4 +20,16 @@ class UserProfileModel {
     gender = json['sex'];
     active = json['active'];
   }
+
+  Map toJson() => {
+        'id': id,
+        'nickname': nickname,
+        'username': username,
+        'userLevel': userLevel,
+        'inviteCode': inviteCode,
+        'avatar': avatar,
+        'mobile': mobile,
+        'sex': gender,
+        'active': active,
+      };
 }
